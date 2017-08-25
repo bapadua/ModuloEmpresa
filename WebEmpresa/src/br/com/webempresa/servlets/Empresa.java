@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import br.com.webempresa.dal.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,25 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/Empresa")
 public class Empresa extends HttpServlet {
-	
-	/*
-	 *  
-	 *  Autor Bruno Alves de Pádua - Bacharelando em Sistemas de Informação.
-		Endereço GitHub: https://github.com/solucaologica
-		Email: solucaoelogica@gmail.com
-	 * 
-	 * 
-	 */
 
 	protected String tabela = "tbempresa";
 	protected String banco = "webempresa";
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/"+banco+"?useSSL=false";
-		String usr = "root";
-		String pwd = "";
+		Connection conexao = null;
 		//======
 		String cnpj = request.getParameter("txtCnpj");
 		String cpf = request.getParameter("txtCpf");
@@ -55,39 +45,39 @@ public class Empresa extends HttpServlet {
 			switch(request.getParameter("do")){
 			case "novo":
 				try {
-					Class.forName(driver);
-					try {
-						String sql = "INSERT INTO "+tabela+"(cnpj, cpf, inscricao_estadual, inscricao_municipal, nome_fantasia, razao_social, "
-								+ "fundacao, contato_principal, ramo_atividade, website, email, telefone)"
-								+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-						Connection conn = DriverManager.getConnection(url, usr, pwd);
-						PreparedStatement pstm = conn.prepareStatement(sql);
-						pstm.setString(1, cnpj);
-						pstm.setString(2, cpf);
-						pstm.setString(3, ie);
-						pstm.setString(4, im);
-						pstm.setString(5, nomeFantasia);
-						pstm.setString(6, razao);
-						pstm.setString(7, fundacao);
-						pstm.setString(8, contatoPrincipal);
-						pstm.setInt(9, Integer.parseInt(ramoAtividade));
-						pstm.setString(10, website);
-						pstm.setString(11, email);
-						pstm.setString(12, telefone);
-						pstm.execute();
-						pstm.close();				
-						conn.close();
-						
-						response.sendRedirect("http://localhost:8081/WebEmpresa/listaEmpresa.jsp");
+					conexao = moduloConexao.conector();
+					String sql = "INSERT INTO "+tabela+"(cnpj, cpf, inscricao_estadual, inscricao_municipal, nome_fantasia, razao_social, "
+							+ "fundacao, contato_principal, ramo_atividade, website, email, telefone)"
+							+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-					} catch (SQLException e) {
-						out.println(e.getMessage());
-					}
-				} catch (Exception e) {
+					PreparedStatement pstm = conexao.prepareStatement(sql);
+					pstm.setString(1, cnpj);
+					pstm.setString(2, cpf);
+					pstm.setString(3, ie);
+					pstm.setString(4, im);
+					pstm.setString(5, nomeFantasia);
+					pstm.setString(6, razao);
+					pstm.setString(7, fundacao);
+					pstm.setString(8, contatoPrincipal);
+					pstm.setInt(9, Integer.parseInt(ramoAtividade));
+					pstm.setString(10, website);
+					pstm.setString(11, email);
+					pstm.setString(12, telefone);
+					pstm.execute();
+					pstm.close();				
+					conexao.close();
+
+					response.sendRedirect("http://localhost:8081/WebEmpresa/listaEmpresa.jsp");
+				} catch (SQLException e) {
 					out.println(e.getMessage());
-				}
+				} 
+				break;
+
+			case "altera":
+
 				break;
 			}
 		}
 	}
 }
+
