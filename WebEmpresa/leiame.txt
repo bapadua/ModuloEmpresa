@@ -1,0 +1,15 @@
+Projeto com fins didáticos.
+Autor: Bruno Alves de Pádua.
+Universidade Mogi das Cruzes
+Bacharelando em Sistemas de Informação.
+Email: solucaoelogica@gmail.com
+git: https://github.com/solucaologica.
+Projeto: WebEmpresa.
+
+Nesse projeto utilizei as ferramentas:
+
+ Eclipse Oxygen Sdk JAVA EE.
+	WampServer(MySql)
+		MysqlWorkBench
+
+Os links para download se encontram no arquivo novaEmpresa.jsp
