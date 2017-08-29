@@ -18,7 +18,7 @@
 			String driver = "com.mysql.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/webempresa?useSSL=false";
 			String usr = "root";
-			String pwd = "";
+			String pwd = "!!mysql";
 			String tbl = "tbempresa";
 			Class.forName(driver);
 			String sql = "SELECT * FROM " + tbl + " WHERE id=" + id;
@@ -37,11 +37,11 @@
 			<td><input type="text" name="txtCpf" value="<%=rs.getString("cpf")%>"></td>
 		</tr>
 		<tr>
-			<td>INSCRI√á√ÉO ESTADUAL</td>
+			<td>INSCRI«√O ESTADUAL</td>
 			<td><input type="text" name="txtInscricaoEstadual" value="<%=rs.getString("inscricao_estadual")%>"></td>
 		</tr>
 		<tr>
-			<td>INSCRI√á√ÉO MUNICIPAL</td>
+			<td>INSCRI«√O MUNICIPAL</td>
 			<td><input type="text" name="txtInscricaoMunicipal" value="<%=rs.getString("inscricao_municipal")%>"></td>
 		</tr>
 		<tr>
@@ -49,11 +49,11 @@
 			<td><input type="text" name="txtNomeFantasia" value="<%=rs.getString("nome_fantasia")%>"></td>
 		</tr>
 		<tr>
-			<td>RAZ√ÉO SOCIAL</td>
+			<td>RAZ√O SOCIAL</td>
 			<td><input type="text" name="txtRazaoSocial" value="<%=rs.getString("razao_social")%>"></td>
 		</tr>
 		<tr>
-			<td>FUNDA√á√ÉO</td>
+			<td>FUNDA«√O</td>
 			<td><input type="text" name="txtFundacao" value="<%=rs.getString("fundacao")%>"></td>
 		</tr>
 		<tr>
@@ -79,9 +79,9 @@
 					<option value="0">----</option>
 			</select></td>
 		</tr>
-		<!-- O insert da empresa nessa vers√£o √© feita at√© o contato principal 
-		Decidi colocar o endere√ßo da empresa em uma tabela diferente afim de controlar
-		Filiais de uma mesma empresa e tamb√©m hist√≥rico caso haja alguma mudan√ßa de endere√ßo
+		<!-- O insert da empresa nessa vers„o È feita atÈ o contato principal 
+		Decidi colocar o endereÁo da empresa em uma tabela diferente afim de controlar
+		Filiais de uma mesma empresa e tambÈm histÛrico caso haja alguma mudanÁa de endereÁo
 		 -->
 		<tr>
 			<td>LOGRADOURO</td>

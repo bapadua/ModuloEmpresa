@@ -22,17 +22,61 @@ MysqlWorkBench disponível em https://dev.mysql.com/downloads/workbench/
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>::WebEmpresa</title>
+
+<script type="text/javascript" src = "jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function (){		
+		$("#txtCnpj").focus();
+		
+		$("#txtCnpj").keyup(function(){
+			if( $(this).val().length == 3){
+				$(this).val($(this).val()+".");
+			}else if( $(this).val().length == 7){
+				$(this).val($(this).val()+".");
+			}else if( $(this).val().length == 11){
+				$(this).val($(this).val()+"/");
+			}else if( $(this).val().length == 16){
+				$(this).val($(this).val()+"-");
+			}
+		});
+		
+		$("#txtCpf").keyup(function(){
+			if( $(this).val().length == 3){
+				$(this).val($(this).val()+".");
+			}else if($(this).val().length == 7){
+				$(this).val($(this).val()+".");
+			}else if($(this).val().length == 11){
+				$(this).val($(this).val()+"-");
+			}
+		});
+		
+		$("#txtTelefone").keyup(function(){
+			if( $(this).val().length == 2){
+				$(this).val("("+$(this).val()+")");
+			}else if( $(this).val().length == 9){
+				$(this).val($(this).val()+"-");
+			}
+		});
+		
+		$("#txtFundacao").keyup(function(){
+			if( $(this).val().length == 4){
+				$(this).val($(this).val()+"/");
+			}else if($(this).val().length == 7)
+				$(this).val($(this).val()+"/");
+		});
+	});
+</script>
 </head>
 <body>
 	<form method="post" action="Empresa?do=novo">
 		<table>
 			<tr>
 				<td>CNPJ</td>
-				<td><input type="text" name="txtCnpj"></td>
+				<td><input type="text" name="txtCnpj"id="txtCnpj"></td>
 			</tr>
 			<tr>
 				<td>CPF</td>
-				<td><input type="text" name="txtCpf"></td>
+				<td><input type="text" name="txtCpf" id="txtCpf"></td>
 			</tr>
 			<tr>
 				<td>INSCRIÇÃO ESTADUAL</td>
@@ -51,8 +95,8 @@ MysqlWorkBench disponível em https://dev.mysql.com/downloads/workbench/
 				<td><input type="text" name="txtRazaoSocial"></td>
 			</tr>
 			<tr>
-				<td>FUNDAÇÃO</td>
-				<td><input type="text" name="txtFundacao"></td>
+				<td>FUNDAÇÃO(AAAA/MM/DD)</td>
+				<td><input type="text" name="txtFundacao" id="txtFundacao"></td>
 			</tr>
 			<tr>
 				<td>CONTATO PRINCIPAL</td>
@@ -68,7 +112,7 @@ MysqlWorkBench disponível em https://dev.mysql.com/downloads/workbench/
 			</tr>
 			<tr>
 				<td>TELEFONE</td>
-				<td><input type="text" name="txtTelefone" /></td>
+				<td><input type="text" name="txtTelefone" id="txtTelefone"/></td>
 			</tr>
 
 			<tr>
@@ -99,7 +143,7 @@ MysqlWorkBench disponível em https://dev.mysql.com/downloads/workbench/
 			</tr>
 			<tr>
 				<td>CEP</td>
-				<td><input type="text" name="txtCEP" /></td>
+				<td><input type="text" name="txtCEP" id="txtCEP"/></td>
 				<td>ESTADO</td>
 				<td><select name="txtEstado">
 						<option value="0">----</option>
