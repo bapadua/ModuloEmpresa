@@ -22,8 +22,8 @@ MysqlWorkBench disponível em https://dev.mysql.com/downloads/workbench/
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>::WebEmpresa</title>
-
-<script type="text/javascript" src = "jquery-2.1.1.min.js"></script>
+<link href="main.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function (){		
 		$("#txtCnpj").focus();
@@ -59,100 +59,112 @@ MysqlWorkBench disponível em https://dev.mysql.com/downloads/workbench/
 		});
 		
 		$("#txtFundacao").keyup(function(){
-			if( $(this).val().length == 4){
+			if( $(this).val().length == 2){
 				$(this).val($(this).val()+"/");
-			}else if($(this).val().length == 7)
+			}else if($(this).val().length == 5){
 				$(this).val($(this).val()+"/");
+			}else if($(this).val().length == 10){
+				var inverter = $(this).val();
+				inverter = inverter.split();
+				normal = inverter.reverse().join("");
+				$(this).val(normal);
+			}			
 		});
+		
+		$("#txtWebsite").click(function(){
+			if( $(this).val().length == 0){
+				$(this).val("http://www.");
+			}
+		});
+		
 	});
 </script>
 </head>
 <body>
+<fieldset id="cadastro">
+	<legend>CADASTRO:</legend>
 	<form method="post" action="Empresa?do=novo">
-		<table>
-			<tr>
-				<td>CNPJ</td>
-				<td><input type="text" name="txtCnpj"id="txtCnpj"></td>
-			</tr>
-			<tr>
-				<td>CPF</td>
-				<td><input type="text" name="txtCpf" id="txtCpf"></td>
-			</tr>
-			<tr>
-				<td>INSCRIÇÃO ESTADUAL</td>
-				<td><input type="text" name="txtInscricaoEstadual"></td>
-			</tr>
-						<tr>
-				<td>INSCRIÇÃO MUNICIPAL</td>
-				<td><input type="text" name="txtInscricaoMunicipal"></td>
-			</tr>
-			<tr>
-				<td>NOME FANTASIA</td>
-				<td><input type="text" name="txtNomeFantasia"></td>
-			</tr>
-				<tr>
-				<td>RAZÃO SOCIAL</td>
-				<td><input type="text" name="txtRazaoSocial"></td>
-			</tr>
-			<tr>
-				<td>FUNDAÇÃO(AAAA/MM/DD)</td>
-				<td><input type="text" name="txtFundacao" id="txtFundacao"></td>
-			</tr>
-			<tr>
-				<td>CONTATO PRINCIPAL</td>
-				<td><input type="text" name="txtContatoPrincipal" /></td>
-			</tr>
-			<tr>
-				<td>EMAIL</td>
-				<td><input type="text" name="txtEmail" /></td>
-			</tr>
-			<tr>
-				<td>WEBSITE</td>
-				<td><input type="text" name="txtWebsite" /></td>
-			</tr>
-			<tr>
-				<td>TELEFONE</td>
-				<td><input type="text" name="txtTelefone" id="txtTelefone"/></td>
-			</tr>
-
-			<tr>
-				<td>RAMO ATIVIDADE</td>
-				<td><select name="txtRamoAtividade">
-						<option value="0">----</option>
-				</select></td>
-			</tr>
-			<!-- O insert da empresa nessa versão é feita até o contato principal 
+		<label>CNPJ:</label> 
+		<br/> 
+		<input type="text" name="txtCnpj" id="txtCnpj" /> 
+		<br/> 
+		<label>CPF:</label>
+		<br/>
+		<input type="text" name="txtCpf" id="txtCpf" /> 
+		<br /> 
+		<label>INSCRIÇÃO ESTADUAL:</label> 
+		<br /> 
+		<input type="text" name="txtInscricaoEstadual" id="inscricaoEstadual" /> 
+		<br />
+		<label>INSCRIÇÃO MUNICIPAL:</label>
+		<br/>
+		<input type="text" name="txtInscricaoMunicipal" id="inscricaoMunicipal"/>
+		<br/>
+		<label>NOME FANTASIA:</label>
+		<br/>
+		<input type="text" name="txtNomeFantasia" />
+		<br/>
+		<label>RAZÃO SOCIAL</label>
+		<br/>
+		<input type="text" name="txtRazaoSocial" />
+		<br/>
+		<label>FUNDAÇÃO(AAAA/MM/DD):</label>
+		<br/>
+		<input type="text" name="txtFundacao" id="txtFundacao" /> 
+		<br/>
+		<label>CONTATO PRINCIPAL:</label>
+		<br/>
+		<input type="text" name="txtContatoPrincipal" />
+		<br/>
+		<label>EMAIL:</label>
+		<br/>
+		<input type="text" name="txtEmail" /> 
+		<br/>
+		<label>WEBSITE:</label>
+		<br/>
+		<input type="text" name="txtWebsite" id="txtWebsite"/>
+		<br/>
+		<label>TELEFONE:</label>
+		<br/>
+		<input type="text" name="txtTelefone" id="txtTelefone" />
+		<br/>
+		<br/>
+		<label>RAMO ATIVIDADE:</label>
+		<select name="txtRamoAtividade">
+			<option value="0">----</option>
+		</select>
+		<!-- O insert da empresa nessa versão é feita até o contato principal 
 		Decidi colocar o endereço da empresa em uma tabela diferente afim de controlar
 		Filiais de uma mesma empresa e também histórico caso haja alguma mudança de endereço
 		 -->
-			<tr>
-				<td>LOGRADOURO</td>
-				<td><input type="text" name="txtEnderecoLogradouro" /></td>
-				<td>NUMERO</td>
-				<td><input type="text" name="txtEnderecoNumero" /></td>
-			</tr>
-			<tr>
-				<td>CIDADE</td>
-				<td><select name="txtCidade">
-						<option value="0">----</option>
-				</select></td>
-				<td>BAIRRO</td>
-				<td><select name="txtBairro">
-						<option value="0">----</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>CEP</td>
-				<td><input type="text" name="txtCEP" id="txtCEP"/></td>
-				<td>ESTADO</td>
-				<td><select name="txtEstado">
-						<option value="0">----</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="SALVAR"></td>
-			</tr>
-		</table>
+		<br/>
+		<br/>
+		<label>CEP:</label><input type="text" name="txtCEP" id="txtCEP" />
+		<br/>
+		<br/>
+		<label>LOGRADOURO:</label><input type="text" name="txtEnderecoLogradouro" /><label>NUMERO:</label>
+		<input type="text" name="txtEnderecoNumero" />
+		<br/>
+		<br/>
+		<label>CIDADE:</label>
+		<select name="txtCidade">
+			<option value="0">----</option>
+		</select> 
+		
+		<label>BAIRRO</label>
+		<select name="txtBairro">
+			<option value="0">----</option>
+		</select> 
+		<br/>
+		<br/>
+		<label>ESTADO</label> 
+		<select name="txtEstado">
+			<option value="0">----</option>
+		</select> 
+		<br/>
+		<br/>
+		<input type="submit" value="SALVAR">
 	</form>
+</fieldset>
 </body>
 </html>
